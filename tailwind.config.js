@@ -11,6 +11,16 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        raleway: ["Raleway", "sans-serif"],
+        fitgree: ["Figtree", "sans-serif"],
+        urbanist: ["Urbanist", "sans-serif"],
+        varela: ["Varela", "sans-serif"],
+      },
+      colors: {
+        offWhite: "#FAF9F6",
+        darkerOffWhite: "#f7f5f1",
+      },
     },
   },
   plugins: [],
