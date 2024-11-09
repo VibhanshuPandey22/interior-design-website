@@ -40,11 +40,11 @@ const SingleCarousel = () => {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-4 font-urbanist">
-                  <h2 className="text-offWhite text-lg sm:text-2xl font-bold">
+                <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-4 font-montserrat">
+                  <h2 className="text-offWhite text-lg sm:text-2xl font-medium">
                     {slide.title}
                   </h2>
-                  <p className="text-offWhite text-sm sm:text-base font-normal">
+                  <p className="text-offWhite text-sm sm:text-base">
                     {slide.description}
                   </p>
                 </div>

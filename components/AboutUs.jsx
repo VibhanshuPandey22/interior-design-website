@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { aboutCards } from "@constants/aboutCards";
+import { ChevronRight } from "lucide-react";
 
 const AboutUs = () => {
   gsap.registerPlugin(ScrollTrigger);
@@ -45,11 +46,14 @@ const AboutUs = () => {
     );
   }, []);
   return (
-    <section className="pt-16 max-sm:pt-12 bg-darkerOffWhite pb-16 max-sm:pb-12">
-      <div className="px-6 h-full grid grid-cols-12 gap-5 text-[0.7rem] sm:max-md:text-xs md:max-lg:text-sm lg:text-[1rem] font-varela">
+    <section
+      id="about"
+      className="pt-16 max-sm:pt-12 bg-darkerOffWhite pb-16 max-sm:pb-12"
+    >
+      <div className="px-6 h-full grid grid-cols-12 gap-5 text-[0.7rem] sm:max-md:text-xs md:max-lg:text-sm lg:text-[1rem] font-montserrat">
         <div className="animate1 col-span-full lg:col-span-6 flex flex-col gap-3">
           <div>
-            <h1 className="text-xl md:max-xl:text-2xl xl:text-3xl text-left font-extrabold">
+            <h1 className="text-xl md:max-xl:text-2xl xl:text-3xl text-left font-medium">
               ABOUT BRICKS AND CARE
             </h1>
           </div>
@@ -68,12 +72,12 @@ const AboutUs = () => {
               With a team of experienced architects and interior designers, we
               have successfully completed an extensive array of projects,
               ranging from cozy residential homes to expansive commercial
-              complexes. Our portfolio is much reflective of our commitment to
-              meeting the unique needs and visions of our clients. Our team
-              brings creativity, expertise, and attention to detail to each
-              project. We transform spaces in a way that not only aligns with
-              our clients' requirements but also elevates the comfort and
-              aesthetic.
+              complexes. Our team brings creativity, expertise, and attention to
+              detail to each project. Our portfolio is much reflective of our
+              commitment to meeting the unique needs and visions of our clients.
+              <button className="flex justify-start mt-12 max-md:mt-7 md:max-lg:mt-10 border-black text-black bg-darkerOffWhite hover:bg-black hover:border-black hover:text-darkerOffWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2">
+                <span className="tracking-wide">LEARN MORE</span>
+              </button>
             </p>
           </div>
         </div>
@@ -89,15 +93,15 @@ const AboutUs = () => {
             {aboutCards.map((card) => (
               <div
                 key={card.id}
-                className="flex flex-col justify-center items-center bg-white shadow-md h-30 w-30 col-span-6 max-md:col-span-full"
+                className="flex flex-col justify-center items-center bg-offWhite shadow-md h-30 w-30 col-span-6 max-md:col-span-full"
               >
                 <div>
                   <img src={card.imgUrl} alt="card" />
                 </div>
-                <div className=" font-varela max-md:text-[0.875rem] mt-4 font-extrabold">
+                <div className=" font-montserrat max-md:text-[0.875rem] mt-4 font-medium">
                   {card.title}
                 </div>
-                <div className="font-varela text-xs xl:text-sm text-orange-600 mt-1">
+                <div className="font-montserrat text-xs xl:text-sm text-orange-600 mt-1">
                   {card.content}
                 </div>
               </div>

@@ -15,7 +15,7 @@ const SubHero = () => {
               className="max-md:text-4xl max-sm:text-[1.75em]"
             />
           </div>
-          <div className=" font-varela text-[1rem] md:max-lg:text-[0.9rem] max-md:text-[1rem] max-sm:text-sm">
+          <div className=" font-montserrat font-medium text-[1rem] md:max-lg:text-[0.9rem] max-md:text-[1rem] max-sm:text-sm">
             PERSONALISED DESIGNS
           </div>
         </div>
@@ -26,7 +26,7 @@ const SubHero = () => {
               className="max-md:text-4xl max-sm:text-[1.75em]"
             />
           </div>
-          <div className=" font-varela text-[1rem] md:max-lg:text-[0.9rem] max-md:text-[1rem] max-sm:text-sm">
+          <div className=" font-montserrat font-medium text-[1rem] md:max-lg:text-[0.9rem] max-md:text-[1rem] max-sm:text-sm">
             100% CUSTOMER CENTRIC
           </div>
         </div>
@@ -38,7 +38,7 @@ const SubHero = () => {
               className="max-md:text-4xl max-sm:text-[1.75em]"
             />
           </div>
-          <div className="font-varela text-[1rem] md:max-lg:text-[0.9rem] max-md:text-[1rem] max-sm:text-sm">
+          <div className="font-montserrat font-medium text-[1rem] md:max-lg:text-[0.9rem] max-md:text-[1rem] max-sm:text-sm">
             TRANSPARENT PRICING
           </div>
         </div>

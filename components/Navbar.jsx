@@ -60,7 +60,7 @@ const Navbar = () => {
           <ul className="flex max-md:hidden md:max-lg:gap-5 md:max-lg:text-xs lg:gap-8 text-sm">
             {navLinks1.map((link, index) => (
               <li
-                className="cursor-pointer hover:text-orange-500 font-varela tracking-wide transition-all duration-200"
+                className="cursor-pointer hover:text-orange-600 font-montserrat font-normal tracking-wide transition-all duration-200"
                 key={index}
               >
                 {link}
@@ -70,7 +70,7 @@ const Navbar = () => {
         </div>
         <div>
           <div className="max-md:hidden">
-            <button className="border-black bg-offWhite text-black hover:bg-black hover:text-offWhite transition-all duration-200 border px-2 py-[0.4rem] text-sm font-varela max-sm:text-[0.6rem] sm:max-md:text-[0.7rem] sm:max-md:py-[0.2rem] max-sm:py-[0.15rem] max-sm:px-2 md:max-lg:text-[0.75rem] md:max-lg:py-[.28rem] md:max-lg:px-[0.4rem]">
+            <button className="border-black bg-offWhite text-black hover:bg-black hover:text-offWhite transition-all duration-200 border px-2 py-[0.4rem] text-sm font-montserrat max-sm:text-[0.6rem] sm:max-md:text-[0.7rem] sm:max-md:py-[0.2rem] max-sm:py-[0.15rem] max-sm:px-2 md:max-lg:text-[0.75rem] md:max-lg:py-[.28rem] md:max-lg:px-[0.4rem]">
               <span> CALL NOW</span>
             </button>
           </div>
@@ -94,7 +94,7 @@ const Navbar = () => {
           <ul className="flex flex-col items-end gap-7 text-sm pr-5">
             {navLinks2.map((link, index) => (
               <li
-                className="cursor-pointer hover:text-orange-500 font-varela tracking-wide transition-all duration-[180ms]"
+                className="cursor-pointer hover:text-orange-500 font-montserrat font-normal tracking-wide transition-all duration-[180ms]"
                 key={index}
               >
                 {link}

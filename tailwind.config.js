@@ -16,6 +16,7 @@ module.exports = {
         fitgree: ["Figtree", "sans-serif"],
         urbanist: ["Urbanist", "sans-serif"],
         varela: ["Varela", "sans-serif"],
+        montserrat: ["Montserrat", "serif"],
       },
       colors: {
         offWhite: "#FAF9F6",

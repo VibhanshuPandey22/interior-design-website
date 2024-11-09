@@ -1,35 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&family=Varela&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* ProductsCarousel.css */
-
-/* .carousel {
-  transition: transform 0.5s ease-in-out;
-} */
-
-@media (max-width: 768px) {
-  .carousel {
-    transform: translateX(-100%); /* For smaller devices */
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .carousel {
-    transform: translateX(
-      -66.67%
-    ); /* For medium devices, showing 2 slides at a time */
-  }
-}
-
-@media (min-width: 1024px) {
-  .carousel {
-    transform: translateX(
-      -33.33%
-    ); /* For larger devices, showing 3 slides at a time */
-  }
-}

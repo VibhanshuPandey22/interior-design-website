@@ -32,12 +32,14 @@ const ProductsCarousel = () => {
   return (
     <section
       ref={sectionRef}
-      className="border-y-[1px] pt-14 pb-14 max-sm:pt-12 max-sm:pb-12"
+      className="border-y-[1px] pt-20 pb-20 max-sm:pt-14 max-sm:pb-14"
     >
       <div>
-        <div className=" gap-3 mx-0 md:max-lg:ml-9 lg:max-xl:ml-8 xl:ml-10 font-varela font-bold flex flex-col items-start max-md:items-center justify-start max-md:px-10">
-          <h1 className="text-xl lg:text-2xl">A HOME TO SUIT EVERY STYLE</h1>
-          <p className="max-md:text-xs lg:text-[0.95rem] text-sm max-sm:max-w-sm max-md:max-w-lg text-left max-md:text-center  text-black/85">
+        <div className=" gap-3 mx-0 md:max-lg:ml-9 lg:max-xl:ml-8 xl:ml-10 font-montserrat  flex flex-col items-start max-md:items-center justify-start max-md:px-10">
+          <h1 className="text-xl lg:text-2xl  max-md:text-center font-medium">
+            DESIGNS THAT SUIT EVERY STYLE
+          </h1>
+          <p className=" mb-5 max-lg:mb-2 max-md:text-xs lg:text-[0.95rem] text-sm max-sm:max-w-sm max-md:max-w-lg text-left max-md:text-center  text-black/85">
             High-quality finishes, stylish designs, and premium modules at
             budget-friendly prices.
           </p>
@@ -50,6 +52,11 @@ const ProductsCarousel = () => {
         </div>
         <div className="max-lg:hidden">
           <TripleCarousel />
+        </div>
+        <div className="flex justify-center">
+          <button className="flex justify-start mt-12 md:max-lg:mt-10 max-md:mt-7 border-black text-black bg-offWhite hover:bg-black hover:border-black hover:text-offWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2">
+            <span className="tracking-wide">MORE OF OUR WORK</span>
+          </button>
         </div>
       </div>
     </section>
