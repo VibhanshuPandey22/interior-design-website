@@ -8,8 +8,27 @@ import { serviceCards } from "@constants/aboutCards";
 const Services = () => {
   gsap.registerPlugin(ScrollTrigger);
   const sectionRef = useRef(null);
-
+  const cardsRef = useRef([]);
   useGSAP(() => {
+    gsap.fromTo(
+      cardsRef.current,
+      {
+        opacity: 0,
+        y: -30,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 90%",
+          end: "bottom 10%",
+        },
+        stagger: 0.125,
+        duration: 0.25,
+        ease: "power2.inOut",
+      }
+    );
     gsap.fromTo(
       sectionRef.current,
       {
@@ -43,8 +62,9 @@ const Services = () => {
           </div>
         </div>
         <div className="grid grid-cols-12 gap-6 w-full px-10 max-sm:px-6">
-          {serviceCards.map((card) => (
+          {serviceCards.map((card, index) => (
             <div
+              ref={(el) => (cardsRef.current[index] = el)}
               key={card.id}
               className=" flex rounded-xl hover:shadow-lg transition-all duration-300 flex-col justify-center items-center py-6 px-5 bg-offWhite shadow-md h-30 w-full col-span-6 max-md:col-span-full text-center"
             >

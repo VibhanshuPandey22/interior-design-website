@@ -5,6 +5,7 @@ import SubHero from "@components/SubHero";
 import ProductsCarousel from "@components/ProductsCarousel";
 import Services from "@components/Services";
 import Brochure from "@components/Brochure";
+import Working from "@components/Working";
 
 const LandingPage = () => {
   return (
@@ -26,6 +27,9 @@ const LandingPage = () => {
       </div>
       <div>
         <Brochure />
+      </div>
+      <div>
+        <Working />
       </div>
     </div>
   );

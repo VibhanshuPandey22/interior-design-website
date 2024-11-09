@@ -20,7 +20,7 @@ const TripleCarousel = () => {
   };
 
   useEffect(() => {
-    const slideInterval = setInterval(nextSlide, 6000);
+    const slideInterval = setInterval(nextSlide, 3000);
     return () => clearInterval(slideInterval);
   }, []);
 

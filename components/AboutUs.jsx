@@ -5,12 +5,51 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { aboutCards } from "@constants/aboutCards";
-import { ChevronRight } from "lucide-react";
 
 const AboutUs = () => {
   gsap.registerPlugin(ScrollTrigger);
+  const cardsRef = useRef([]);
+  const buttonRef = useRef(null);
 
   useGSAP(() => {
+    gsap.fromTo(
+      buttonRef.current,
+      {
+        opacity: 0,
+        x: -300,
+      },
+      {
+        opacity: 1,
+        x: 0,
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 90%",
+          end: "bottom 10%",
+        },
+        delay: 0.9,
+        duration: 0.75,
+        ease: "power2.inOut",
+      }
+    );
+    gsap.fromTo(
+      cardsRef.current,
+      {
+        opacity: 0,
+        y: -30,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 90%",
+          end: "bottom 10%",
+        },
+        stagger: 0.375,
+        duration: 0.275,
+        ease: "power2.inOut",
+      }
+    );
     gsap.fromTo(
       ".animate1",
       {
@@ -75,7 +114,10 @@ const AboutUs = () => {
               complexes. Our team brings creativity, expertise, and attention to
               detail to each project. Our portfolio is much reflective of our
               commitment to meeting the unique needs and visions of our clients.
-              <button className="flex justify-start mt-12 max-md:mt-7 md:max-lg:mt-10 border-black text-black bg-darkerOffWhite hover:bg-black hover:border-black hover:text-darkerOffWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2">
+              <button
+                ref={buttonRef}
+                className="flex justify-start mt-12 max-md:mt-7 md:max-lg:mt-10 border-black text-black bg-darkerOffWhite hover:bg-black hover:border-black hover:text-darkerOffWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2"
+              >
                 <span className="tracking-wide">LEARN MORE</span>
               </button>
             </p>
@@ -90,8 +132,9 @@ const AboutUs = () => {
             priority
           />
           <div className="absolute inset-0 grid grid-cols-12 gap-5 my-5 mx-5">
-            {aboutCards.map((card) => (
+            {aboutCards.map((card, index) => (
               <div
+                ref={(el) => (cardsRef.current[index] = el)}
                 key={card.id}
                 className="flex flex-col justify-center items-center bg-offWhite shadow-md h-30 w-30 col-span-6 max-md:col-span-full"
               >
