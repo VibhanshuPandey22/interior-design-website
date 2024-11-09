@@ -71,7 +71,7 @@ const Navbar = () => {
         <div>
           <div className="max-md:hidden">
             <button className="border-black bg-offWhite text-black hover:bg-black hover:text-offWhite transition-all duration-200 border px-2 py-[0.4rem] text-sm font-montserrat max-sm:text-[0.6rem] sm:max-md:text-[0.7rem] sm:max-md:py-[0.2rem] max-sm:py-[0.15rem] max-sm:px-2 md:max-lg:text-[0.75rem] md:max-lg:py-[.28rem] md:max-lg:px-[0.4rem]">
-              <span> CALL NOW</span>
+              <span> START NOW</span>
             </button>
           </div>
 

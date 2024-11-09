@@ -6,6 +6,8 @@ import ProductsCarousel from "@components/ProductsCarousel";
 import Services from "@components/Services";
 import Brochure from "@components/Brochure";
 import Working from "@components/Working";
+import Testimony from "@components/Testimony";
+import ContactUs from "@components/ContactUs";
 
 const LandingPage = () => {
   return (
@@ -30,6 +32,12 @@ const LandingPage = () => {
       </div>
       <div>
         <Working />
+      </div>
+      <div>
+        <Testimony />
+      </div>
+      <div>
+        <ContactUs />
       </div>
     </div>
   );

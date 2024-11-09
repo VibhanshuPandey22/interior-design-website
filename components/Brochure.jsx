@@ -22,7 +22,7 @@ const Brochure = () => {
         y: 0,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 90%",
+          start: "top 85%",
           end: "bottom 10%",
         },
         delay: 0.65,
