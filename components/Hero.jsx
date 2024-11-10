@@ -2,14 +2,16 @@
 import React from "react";
 import Image from "next/image";
 import { useRef } from "react";
+import { useFormContext } from "@app/context";
 
 const Hero = () => {
+  const { isFormOpen, setIsFormOpen } = useFormContext();
   const textRef = useRef(null);
 
   return (
     <section
       id="hero"
-      className="relative mb-0 pb-0 h-screen max-md:h-[75vh] w-full overflow-hidden"
+      className={`relative mb-0 pb-0 h-screen max-md:h-[75vh] w-full overflow-hidden `}
     >
       <div className="relative w-full h-full">
         <Image

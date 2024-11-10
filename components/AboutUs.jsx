@@ -99,7 +99,7 @@ const AboutUs = () => {
           <div>
             <p className="pt-5 max-md:pt-2 text-left max-md:text-sm max-md:leading-relaxed text-sm leading-relaxed md:max-lg:text-[0.9rem] lg:text-[1rem]">
               Bricks and Care has years of experience in the industry and we
-              believe that great design is about more than just aesthetics—it's
+              believe that great design is about more than just aesthetics, it's
               about creating spaces that improve the way you live and work.
               <span className="text-orange-600">
                 {" "}

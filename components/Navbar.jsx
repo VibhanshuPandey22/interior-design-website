@@ -4,8 +4,18 @@ import Image from "next/image";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { navLinks1, navLinks2 } from "@constants/navbarLists";
+import { useFormContext } from "@app/context";
 
 const Navbar = () => {
+  const { isFormOpen, setIsFormOpen } = useFormContext();
+
+  const toggleForm = () => {
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
+    setIsFormOpen((prev) => !prev);
+  };
+
   const [isShadowVisible, setIsShadowVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -29,6 +39,9 @@ const Navbar = () => {
         isShadowVisible && "shadow-md"
       }`}
     >
+      {isFormOpen && (
+        <div className="absolute inset-0 bg-black/60 z-10 pointer-events-auto" />
+      )}
       <div className="flex w-full justify-between items-center h-full">
         <div>
           <Image
@@ -70,14 +83,17 @@ const Navbar = () => {
         </div>
         <div>
           <div className="max-md:hidden">
-            <button className="border-black bg-offWhite text-black hover:bg-black hover:text-offWhite transition-all duration-200 border px-2 py-[0.4rem] text-sm font-montserrat max-sm:text-[0.6rem] sm:max-md:text-[0.7rem] sm:max-md:py-[0.2rem] max-sm:py-[0.15rem] max-sm:px-2 md:max-lg:text-[0.75rem] md:max-lg:py-[.28rem] md:max-lg:px-[0.4rem]">
+            <button
+              onClick={toggleForm}
+              className="border-black bg-offWhite text-black hover:bg-black hover:text-offWhite transition-all duration-200 border px-2 py-[0.4rem] text-sm font-montserrat max-sm:text-[0.6rem] sm:max-md:text-[0.7rem] sm:max-md:py-[0.2rem] max-sm:py-[0.15rem] max-sm:px-2 md:max-lg:text-[0.75rem] md:max-lg:py-[.28rem] md:max-lg:px-[0.4rem]"
+            >
               <span> START NOW</span>
             </button>
           </div>
 
           <div
             onClick={toggleMenu}
-            className="md:hidden cursor-pointer hover:text-orange-500 transition-all duration-[180ms]"
+            className="md:hidden cursor-pointer hover:text-orange-600 transition-all duration-[180ms]"
           >
             <MenuIcon />
           </div>
@@ -87,19 +103,25 @@ const Navbar = () => {
         <div className="z-100 absolute inset-0 w-screen h-fit pb-10 bg-offWhite shadow-md">
           <div
             onClick={toggleMenu}
-            className="hover:text-orange-500 transition-all duration-200 mt-4 pl-2 mb-4 cursor-pointer w-fit"
+            className="hover:text-orange-600 transition-all duration-200 mt-4 pl-2 mb-4 cursor-pointer w-fit"
           >
             <CloseIcon fontSize="small" />
           </div>
           <ul className="flex flex-col items-end gap-7 text-sm pr-5">
             {navLinks2.map((link, index) => (
               <li
-                className="cursor-pointer hover:text-orange-500 font-montserrat font-normal tracking-wide transition-all duration-[180ms]"
+                className="cursor-pointer hover:text-orange-600 font-montserrat font-normal tracking-wide transition-all duration-[180ms]"
                 key={index}
               >
                 {link}
               </li>
             ))}
+            <li
+              onClick={toggleForm}
+              className="cursor-pointer font-normal hover:text-orange-600 font-montserrat tracking-wide transition-all duration-[180ms]"
+            >
+              CONTACT US
+            </li>
           </ul>
         </div>
       )}
