@@ -6,10 +6,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import { useRouter } from "next/navigation";
 
 const ProductsCarousel = () => {
   gsap.registerPlugin(ScrollTrigger);
   const sectionRef = useRef(null);
+  const router = useRouter();
 
   useGSAP(() => {
     gsap.fromTo(
@@ -54,8 +56,11 @@ const ProductsCarousel = () => {
           <TripleCarousel />
         </div>
         <div className="flex justify-center">
-          <button className="flex justify-start mt-12 md:max-lg:mt-10 max-md:mt-7 border-black text-black bg-offWhite hover:bg-black hover:border-black hover:text-offWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2">
-            <span className="tracking-wide">MORE OF OUR WORK</span>
+          <button
+            onClick={() => router.push("/designs")}
+            className="flex justify-start mt-12 md:max-lg:mt-10 max-md:mt-7 border-black text-black bg-offWhite hover:bg-black hover:border-black hover:text-offWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2"
+          >
+            <span className="tracking-wide"> SEE MORE DESIGNS</span>
           </button>
         </div>
       </div>

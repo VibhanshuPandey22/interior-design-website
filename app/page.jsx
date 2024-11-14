@@ -44,9 +44,13 @@ const LandingPage = () => {
       </div>
       {isFormOpen && (
         <>
-          <div className="absolute inset-0 bg-black/60 z-10 pointer-events-none" />
+          <div className="fixed inset-0 bg-black/60 z-10 pointer-events-none" />
           <div className="absolute inset-0 z-50">
-            <Form title="CONTACT US" text="Please give your details" />
+            <Form
+              title="CONTACT US"
+              text1="Please give your personal details"
+              text2="Please give your address details"
+            />
           </div>
         </>
       )}

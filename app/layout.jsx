@@ -14,7 +14,7 @@ const RootLayout = ({ children }) => {
       <html lang="en ">
         <body className="bg-offWhite">
           <Navbar />
-          <main className="pt-16 max-sm:pt-14">{children}</main>
+          <main className={`pt-16 max-sm:pt-14`}>{children}</main>
           <Footer />
         </body>
       </html>

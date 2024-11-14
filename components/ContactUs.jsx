@@ -3,8 +3,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import { useFormContext } from "@app/context";
 
 const ContactUs = () => {
+  const { isFormOpen, setIsFormOpen } = useFormContext();
+
+  const toggleForm = () => {
+    setIsFormOpen((prev) => !prev);
+  };
+
   gsap.registerPlugin(ScrollTrigger);
   const sectionRef = useRef(null);
   useGSAP(() => {
@@ -43,7 +50,10 @@ const ContactUs = () => {
         </div>
         <div className=" col-span-full flex items-center justify-center gap-5 xl:gap-6 mt-3 xl:mt-5">
           <div>
-            <button className="flex gap-2 rounded-full justify-center items-centertransition-all duration-300 px-4 py-2 bg-offWhite drop-shadow-md hover:drop-shadow-lg text-sm xl:text-[1.05rem] xl:py-3">
+            <button
+              onClick={toggleForm}
+              className="flex gap-2 rounded-full justify-center items-centertransition-all duration-300 px-4 py-2 bg-offWhite drop-shadow-md hover:drop-shadow-lg text-sm xl:text-[1.05rem] xl:py-3"
+            >
               <span>
                 <img src="/call.svg" height={22} width={22} alt="" />
               </span>

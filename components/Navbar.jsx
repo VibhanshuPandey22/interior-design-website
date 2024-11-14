@@ -3,10 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { navLinks1, navLinks2 } from "@constants/navbarLists";
+import { navLinks } from "@constants/navbarLists";
 import { useFormContext } from "@app/context";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const { isFormOpen, setIsFormOpen } = useFormContext();
 
   const toggleForm = () => {
@@ -25,10 +27,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const heroSectionHeight = document.querySelector("#hero").clientHeight;
-      setIsShadowVisible(window.scrollY > heroSectionHeight * 0.08);
+      setIsShadowVisible(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -71,12 +71,13 @@ const Navbar = () => {
         </div>
         <div>
           <ul className="flex max-md:hidden md:max-lg:gap-5 md:max-lg:text-xs lg:gap-8 text-sm">
-            {navLinks1.map((link, index) => (
+            {navLinks.map((link, index) => (
               <li
+                onClick={() => router.push(link.href)}
                 className="cursor-pointer hover:text-orange-600 font-montserrat font-normal tracking-wide transition-all duration-200"
                 key={index}
               >
-                {link}
+                {link.text}
               </li>
             ))}
           </ul>
@@ -108,12 +109,13 @@ const Navbar = () => {
             <CloseIcon fontSize="small" />
           </div>
           <ul className="flex flex-col items-end gap-7 text-sm pr-5">
-            {navLinks2.map((link, index) => (
+            {navLinks.map((link, index) => (
               <li
-                className="cursor-pointer hover:text-orange-600 font-montserrat font-normal tracking-wide transition-all duration-[180ms]"
+                onClick={() => router.push(link.href)}
+                className="cursor-pointer hover:text-orange-600 font-montserrat font-normal tracking-wide transition-all duration-200"
                 key={index}
               >
-                {link}
+                {link.text}
               </li>
             ))}
             <li

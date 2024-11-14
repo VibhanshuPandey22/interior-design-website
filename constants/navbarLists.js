@@ -1,2 +1,18 @@
-export const navLinks1 = ["HOME", "ABOUT", "OUR WORK", "SERVICES"];
-export const navLinks2 = ["HOME", "ABOUT", "SERVICES", "OUR WORK"];
+export const navLinks = [
+  {
+    text: "HOME",
+    href: "/",
+  },
+  {
+    text: "ABOUT",
+    href: "/about",
+  },
+  {
+    text: "SERVICES",
+    href: "/ourServices",
+  },
+  {
+    text: "OUR WORK",
+    href: "/ourWork",
+  },
+];
