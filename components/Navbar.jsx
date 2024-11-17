@@ -71,7 +71,7 @@ const Navbar = () => {
           />
         </div>
         <div>
-          <ul className="flex max-md:hidden md:max-lg:gap-5 md:max-lg:text-xs lg:gap-8 text-sm">
+          <ul className="flex max-md:hidden md:max-lg:gap-4 md:max-lg:text-xs lg:gap-8 text-sm">
             {navLinks.map((link, index) => (
               <li
                 onClick={() => router.push(link.href)}
