@@ -5,11 +5,13 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { aboutCards } from "@constants/aboutCards";
+import { useRouter } from "next/navigation";
 
 const AboutUs = () => {
   gsap.registerPlugin(ScrollTrigger);
   const cardsRef = useRef([]);
   const buttonRef = useRef(null);
+  const router = useRouter();
 
   useGSAP(() => {
     gsap.fromTo(
@@ -26,7 +28,7 @@ const AboutUs = () => {
           start: "top 90%",
           end: "bottom 10%",
         },
-        delay: 0.9,
+        delay: 0.31,
         duration: 0.75,
         ease: "power2.inOut",
       }
@@ -45,8 +47,8 @@ const AboutUs = () => {
           start: "top 90%",
           end: "bottom 10%",
         },
-        stagger: 0.375,
-        duration: 0.275,
+        stagger: 0.17,
+        duration: 0.27,
         ease: "power2.inOut",
       }
     );
@@ -115,6 +117,7 @@ const AboutUs = () => {
               detail to each project. Our portfolio is much reflective of our
               commitment to meeting the unique needs and visions of our clients.
               <button
+                onClick={() => router.push("/about")}
                 ref={buttonRef}
                 className="flex justify-start mt-12 max-md:mt-7 md:max-lg:mt-10 border-black text-black bg-darkerOffWhite hover:bg-black hover:border-black hover:text-darkerOffWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2"
               >

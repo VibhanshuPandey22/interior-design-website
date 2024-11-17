@@ -8,6 +8,10 @@ export const navLinks = [
     href: "/about",
   },
   {
+    text: "DESIGNS",
+    href: "/designs",
+  },
+  {
     text: "SERVICES",
     href: "/ourServices",
   },
