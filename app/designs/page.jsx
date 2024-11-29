@@ -2,7 +2,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import Image from "next/image";
 import { useFormContext } from "@app/context";
@@ -11,11 +11,15 @@ import { roomTypes, designs } from "@constants/designs";
 import { X } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import FormNew from "@components/FormNew";
 
 const Designs = () => {
   gsap.registerPlugin(ScrollTrigger);
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
+  const modalRef = useRef(null); // Ref for the modal content
+  const overlayRef = useRef(null); // Ref for the overlay (background)
+
   useGSAP(() => {
     gsap.fromTo(
       cardsRef.current,
@@ -53,6 +57,19 @@ const Designs = () => {
       }
     );
   }, []);
+
+  useEffect(() => {
+    const handeClickOutsideModal = (e) => {
+      if (overlayRef.current && !modalRef.current.contains(e.target)) {
+        closeImage();
+      }
+    };
+    document.addEventListener("mousedown", handeClickOutsideModal);
+    return () => {
+      document.removeEventListener("mousedown", handeClickOutsideModal);
+    };
+  });
+
   const [selectedType, setSelectedType] = useState("All");
   const [selectedDesign, setSelectedDesign] = useState(null);
   const { isFormOpen, setIsFormOpen } = useFormContext();
@@ -125,8 +142,14 @@ const Designs = () => {
       </div>
 
       {selectedDesign && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 font-montserrat">
-          <div className="bg-offWhite rounded-lg overflow-hidden shadow-lg max-w-[95%] max-h-[90%] relative">
+        <div
+          ref={overlayRef}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 font-montserrat"
+        >
+          <div
+            ref={modalRef}
+            className="bg-offWhite rounded-lg overflow-hidden shadow-lg max-w-[95%] max-h-[90%] relative"
+          >
             <div className="relative w-full h-full max-h-[90vh] overflow-auto">
               <button
                 onClick={closeImage}
@@ -168,7 +191,7 @@ const Designs = () => {
         <>
           <div className="fixed inset-0 bg-black/60 z-10 pointer-events-none" />
           <div className="absolute inset-0 z-50">
-            <Form
+            <FormNew
               title="CONTACT US"
               text1="Please give your personal details"
               text2="Please give your address details"

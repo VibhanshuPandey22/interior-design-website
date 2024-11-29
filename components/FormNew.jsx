@@ -5,15 +5,18 @@ import { useFormContext } from "@app/context";
 import { indianStates } from "@constants/states";
 import { CheckCircle } from "lucide-react";
 
-const Form = (props) => {
+const FormNew = (props) => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
+
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [step, setStep] = useState(1);
+
   const [wrongMobile, setWrongMobile] = useState(false);
-  const [duplicateMobile, setDuplicateMobile] = useState(false);
   const [wrongEmail, setWrongEmail] = useState(false);
   const [wrongPinCode, setWrongPinCode] = useState(false);
-  const [duplicateEmail, setDuplicateEmail] = useState(false);
-  const [step, setStep] = useState(1);
+  const [wrongCity, setWrongCity] = useState(false);
+  const [wrongName, setWrongName] = useState(false);
 
   const toggleForm = () => {
     setIsFormOpen((prev) => !prev);
@@ -22,25 +25,75 @@ const Form = (props) => {
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     mobile: "",
+    email: "",
     address: "",
     city: "",
     state: "",
     pinCode: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const fieldChecks = () => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const mobileRegex = /^[6-9]\d{9}$/; // Ensures 10 digits, starting with 6-9
+    const pinCodeRegex = /^[1-9][0-9]{5}$/; // Ensures 6 digits, not starting with 0
+    //name and state cant contain numbers
+    const cityRegex = /^[A-Za-z\s'-]+$/;
+    const nameRegex = /^[A-Za-z\s'-]+$/;
+
+    let flag = true;
+
+    if (!nameRegex.test(formData.name)) {
+      setWrongName(true);
+      setStep(1);
+      setFormData((prev) => ({
+        ...prev,
+        name: "",
+      }));
+      flag = false;
+    }
+    if (!emailRegex.test(formData.email)) {
+      setWrongEmail(true);
+      setStep(1);
+      setFormData((prev) => ({
+        ...prev,
+        email: "",
+      }));
+      flag = false;
+    }
+    if (!mobileRegex.test(formData.mobile)) {
+      setWrongMobile(true);
+      setStep(1);
+      setFormData((prev) => ({
+        ...prev,
+        mobile: "",
+      }));
+      flag = false;
+    }
+    if (!pinCodeRegex.test(formData.pinCode)) {
+      setWrongPinCode(true);
+      setStep(2);
+      setFormData((prev) => ({
+        ...prev,
+        pinCode: "",
+      }));
+      flag = false;
+    }
+    if (!cityRegex.test(formData.city)) {
+      setWrongCity(true);
+      setStep(2);
+      setFormData((prev) => ({
+        ...prev,
+        city: "",
+      }));
+      flag = false;
+    }
+
+    return flag;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (
       !formData.name ||
       !formData.mobile ||
@@ -50,14 +103,20 @@ const Form = (props) => {
       !formData.state ||
       !formData.pinCode
     ) {
-      alert("Please fill in all the fields.");
+      alert("Please fill in all fields.");
       return;
-    } else if (formData.name && formData.mobile && formData.email) {
+    }
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    const areFieldsCorrect = fieldChecks();
+    if (areFieldsCorrect) {
       try {
-        const result = await fetch("/api/submit", {
+        const response = await fetch("/api/submit", {
           method: "POST",
           headers: {
-            "Content-type": "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             name: formData.name,
@@ -69,63 +128,17 @@ const Form = (props) => {
             pinCode: formData.pinCode,
           }),
         });
-
-        const data = await result.json();
-
-        if (result.ok) {
+        //   console.log("response object :", response);
+        if (response.ok) {
           setIsFormSubmitted(true);
-        }
-
-        if (!result.ok) {
-          if (data.message && data.message.includes("mobile")) {
-            setWrongMobile(true);
-            setStep(1);
-            setFormData((prev) => ({
-              ...prev,
-              mobile: "",
-            }));
-          }
-
-          if (data.message && data.message.includes("email")) {
-            setWrongEmail(true);
-            setStep(1);
-            setFormData((prev) => ({
-              ...prev,
-              email: "",
-            }));
-          }
-
-          if (data.message && data.message.includes("pin")) {
-            setWrongPinCode(true);
-            setStep(2);
-            setFormData((prev) => ({
-              ...prev,
-              pinCode: "",
-            }));
-          }
-
-          if (data.duplicateField === "mobile") {
-            setDuplicateMobile(true);
-            setStep(1);
-            setFormData((prev) => ({
-              ...prev,
-              mobile: "",
-            }));
-            console.log(duplicateMobile);
-          } else if (data.duplicateField === "email") {
-            setDuplicateEmail(true);
-            setStep(1);
-            setFormData((prev) => ({
-              ...prev,
-              email: "",
-            }));
-            console.log(duplicateEmail);
-          }
+        } else if (!response.ok) {
+          console.log("response object not ok :", response);
         }
       } catch (error) {
-        console.log(error);
+        console.error("Error submitting form:", error);
       }
     }
+    setIsSubmitting(false);
   };
 
   return (
@@ -158,7 +171,9 @@ const Form = (props) => {
         </div>
       ) : (
         <div
-          className={`w-full max-w-md bg-offWhite rounded-lg shadow-lg ${
+          className={`${
+            isSubmitting && "pointer-events-none"
+          } w-full max-w-md bg-offWhite rounded-lg shadow-lg ${
             step === 2 && "pb-14"
           } p-8  relative `}
         >
@@ -198,15 +213,36 @@ const Form = (props) => {
                     Name <span className="text-red-600">*</span>
                   </label>
                   <input
+                    onClick={() => {
+                      setWrongName(false);
+                    }}
                     id="name"
                     name="name"
                     type="text"
                     placeholder="John Doe"
                     value={formData.name}
                     autoComplete="off"
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border  border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-offWhite"
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
+                      setFormData((prev) => ({
+                        ...prev,
+                        name: inputValue,
+                      }));
+                      if (/^[A-Za-z\s'-]+$/.test(inputValue)) {
+                        setWrongName(false);
+                      } else {
+                        setWrongName(true);
+                      }
+                    }}
+                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                      wrongName && "border-red-500 focus:ring-0"
+                    }`}
                   />
+                  {wrongName && (
+                    <div className="text-xs mt-1 text-red-600">
+                      Name should not contain numbers
+                    </div>
+                  )}
                 </div>
                 <div>
                   <label
@@ -218,7 +254,6 @@ const Form = (props) => {
                   <input
                     onClick={() => {
                       setWrongMobile(false);
-                      setDuplicateMobile(false);
                     }}
                     id="mobile"
                     name="mobile"
@@ -226,32 +261,27 @@ const Form = (props) => {
                     placeholder="98765 43210"
                     value={formData.mobile}
                     autoComplete="off"
-                    onChange={handleChange}
-                    minLength={10}
-                    maxLength={10}
-                    // pattern="\d*"
-                    onInvalid={(e) => {
-                      e.preventDefault();
-                      setWrongMobile(true);
-                      setStep(1);
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
                       setFormData((prev) => ({
                         ...prev,
-                        mobile: "",
+                        mobile: inputValue,
                       }));
+                      if (/^[6-9]\d{9}$/.test(inputValue)) {
+                        setWrongMobile(false);
+                      } else {
+                        setWrongMobile(true);
+                      }
                     }}
+                    maxLength={10}
+                    pattern="^[6-9]\d{9}$"
                     className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
-                      (wrongMobile || duplicateMobile) &&
-                      "border-red-500 focus:ring-0"
+                      wrongMobile && "border-red-500 focus:ring-0"
                     }`}
                   />
                   {wrongMobile && (
                     <div className="text-xs mt-1 text-red-600">
-                      Please enter a valid number.
-                    </div>
-                  )}
-                  {duplicateMobile && (
-                    <div className="text-xs mt-1 text-red-600">
-                      This number is already registered.
+                      Please enter a valid mobile number (10 digits)
                     </div>
                   )}
                 </div>
@@ -265,7 +295,6 @@ const Form = (props) => {
                   <input
                     onClick={() => {
                       setWrongEmail(false);
-                      setDuplicateEmail(false);
                     }}
                     id="email"
                     name="email"
@@ -273,30 +302,29 @@ const Form = (props) => {
                     placeholder="john@example.com"
                     value={formData.email}
                     autoComplete="off"
-                    onChange={handleChange}
-                    // pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                    onInvalid={(e) => {
-                      e.preventDefault();
-                      setWrongEmail(true);
-                      setStep(1);
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
                       setFormData((prev) => ({
                         ...prev,
-                        email: "",
+                        email: inputValue,
                       }));
+                      if (
+                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                          inputValue
+                        )
+                      ) {
+                        setWrongEmail(false);
+                      } else {
+                        setWrongEmail(true);
+                      }
                     }}
                     className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
-                      (wrongEmail || duplicateEmail) &&
-                      "border-red-500 focus:ring-0"
+                      wrongEmail && "border-red-500 focus:ring-0"
                     }`}
                   />
                   {wrongEmail && (
                     <div className="text-xs mt-1 text-red-600">
-                      Please enter a valid email.
-                    </div>
-                  )}
-                  {duplicateEmail && (
-                    <div className="text-xs mt-1 text-red-600">
-                      This email is already registered.
+                      Please enter a valid email
                     </div>
                   )}
                 </div>
@@ -325,12 +353,17 @@ const Form = (props) => {
                     placeholder="123, Tower 0, Street 9"
                     value={formData.address}
                     autoComplete="off"
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
+                      setFormData((prev) => ({
+                        ...prev,
+                        address: inputValue,
+                      }));
+                    }}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-offWhite"
                   />
                 </div>
 
-                {/* City */}
                 <div>
                   <label
                     htmlFor="city"
@@ -339,18 +372,38 @@ const Form = (props) => {
                     City <span className="text-red-600">*</span>
                   </label>
                   <input
+                    onClick={() => {
+                      setWrongCity(false);
+                    }}
                     id="city"
                     name="city"
                     type="text"
                     placeholder="City"
                     value={formData.city}
                     autoComplete="off"
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-offWhite"
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
+                      setFormData((prev) => ({
+                        ...prev,
+                        city: inputValue,
+                      }));
+                      if (/^[A-Za-z\s'-]+$/.test(inputValue)) {
+                        setWrongCity(false);
+                      } else {
+                        setWrongCity(true);
+                      }
+                    }}
+                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                      wrongCity && "border-red-500 focus:ring-0"
+                    }`}
                   />
+                  {wrongCity && (
+                    <div className="text-xs mt-1 text-red-600">
+                      City should not contain numbers
+                    </div>
+                  )}
                 </div>
 
-                {/* State */}
                 <div>
                   <label
                     htmlFor="state"
@@ -362,7 +415,13 @@ const Form = (props) => {
                     id="state"
                     name="state"
                     value={formData.state}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
+                      setFormData((prev) => ({
+                        ...prev,
+                        state: inputValue,
+                      }));
+                    }}
                     className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-offWhite"
                   >
                     <option value="" className="text-gray-400">
@@ -379,7 +438,6 @@ const Form = (props) => {
                     ))}
                   </select>
                 </div>
-
                 <div>
                   <label
                     htmlFor="pinCode"
@@ -393,37 +451,42 @@ const Form = (props) => {
                     }}
                     id="pinCode"
                     name="pinCode"
-                    type="text"
+                    type="tel"
                     placeholder="123456"
-                    minLength={6}
-                    maxLength={6}
                     value={formData.pinCode}
                     autoComplete="off"
-                    onChange={handleChange}
-                    onInvalid={(e) => {
-                      e.preventDefault();
-                      setWrongPinCode(true);
-                      setStep(2);
+                    onChange={(e) => {
+                      const inputValue = e.target.value;
                       setFormData((prev) => ({
                         ...prev,
-                        pinCode: "",
+                        pinCode: inputValue,
                       }));
+                      if (/^[1-9][0-9]{5}$/.test(inputValue)) {
+                        setWrongPinCode(false);
+                      } else {
+                        setWrongPinCode(true);
+                      }
                     }}
+                    maxLength={6}
                     className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
                       wrongPinCode && "border-red-500 focus:ring-0"
                     }`}
                   />
                   {wrongPinCode && (
                     <div className="text-xs mt-1 text-red-600">
-                      Please enter a valid 6 digit pin code.
+                      Please enter a valid pin code (0-6 digits)
                     </div>
                   )}
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-black text-offWhite hover:text-white py-2 px-4 rounded-md hover:bg-orange-600  transition duration-300 ease-in-out"
+                  className={`w-full text-offWhite hover:text-white py-2 px-4 rounded-md hover:bg-orange-600  transition duration-300 ease-in-out ${
+                    isSubmitting
+                      ? "bg-black/80 pointer-events-none"
+                      : "bg-black"
+                  }`}
                 >
-                  Submit
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
                 <div
                   onClick={() => setStep(1)}
@@ -440,4 +503,4 @@ const Form = (props) => {
   );
 };
 
-export default Form;
+export default FormNew;

@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRef, useEffect } from "react";
+import { useFormContext } from "@app/context";
 
 const Working = () => {
   gsap.registerPlugin(ScrollTrigger);
@@ -12,6 +13,11 @@ const Working = () => {
   const cardsRef2 = useRef([]);
   const lineRef1 = useRef(null);
   const lineRef2 = useRef(null);
+
+  const { isFormOpen, setIsFormOpen } = useFormContext();
+  const toggleForm = () => {
+    setIsFormOpen((prev) => !prev);
+  };
 
   useGSAP(() => {
     gsap.fromTo(
@@ -129,6 +135,7 @@ const Working = () => {
             <div className="absolute flex justify-around items-center inset-0 lg:px-10 xl:px-14 2xl:px-20 h-full">
               {steps.map((step, index) => (
                 <div
+                  onClick={toggleForm}
                   key={index}
                   ref={(el) => (cardsRef1.current[index] = el)}
                   className="rounded-xl cursor-pointer bg-offWhite hover:shadow-lg transition-all duration-200 p-3 xl:p-4 text-black drop-shadow-lg flex flex-col gap-1 items-center justify-center xl:text-[0.9rem] max-xl:text-sm"
@@ -159,6 +166,7 @@ const Working = () => {
               <div className="absolute flex flex-col justify-around items-center inset-0 h-full text-[0.95rem] max-sm:text-sm">
                 {steps.map((step, index) => (
                   <div
+                    onClick={toggleForm}
                     key={index}
                     ref={(el) => (cardsRef2.current[index] = el)}
                     className="h-16 cursor-pointer bg-offWhite w-[70vw] max-sm:w-[90vw] drop-shadow-md hover:shadow-lg transition-all duration-200 px-20 text-black grid grid-cols-12 gap-3"

@@ -3,15 +3,30 @@ import Image from "next/image";
 import { useFormContext } from "@app/context";
 import Form from "@components/Form";
 import { founderDetails } from "@constants/aboutUs";
-import { useState } from "react";
 import { X } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useRef, useEffect, useState } from "react";
+import FormNew from "@components/FormNew";
 
 const aboutPage = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
   const [selectedFounder, setSelectedFounder] = useState(null);
   const router = useRouter();
+  const modalRef = useRef(null); // Ref for the modal content
+  const overlayRef = useRef(null); // Ref for the overlay (background)
+
+  useEffect(() => {
+    const handeClickOutsideModal = (e) => {
+      if (overlayRef.current && !modalRef.current.contains(e.target)) {
+        closeFounderDiv();
+      }
+    };
+    document.addEventListener("mousedown", handeClickOutsideModal);
+    return () => {
+      document.removeEventListener("mousedown", handeClickOutsideModal);
+    };
+  });
 
   const openFounderDiv = (founder) => {
     setSelectedFounder(founder);
@@ -24,8 +39,14 @@ const aboutPage = () => {
   return (
     <section className="min-h-screen font-montserrat mt-10 relative ">
       {selectedFounder && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center font-montserrat bg-black/85">
-          <div className="bg-offWhite max-sm:max-h-[75vh] rounded-lg w-[50%] max-sm:w-[75%] max-md:w-[80%] overflow-scroll shadow-lg relative">
+        <div
+          ref={overlayRef}
+          className="fixed inset-0 z-50 flex items-center justify-center font-montserrat bg-black/85"
+        >
+          <div
+            ref={modalRef}
+            className="bg-offWhite max-sm:max-h-[75vh] rounded-lg w-[50%] max-sm:w-[75%] max-md:w-[80%] overflow-scroll shadow-lg relative"
+          >
             <div>
               <div className="relative w-full max-h-[90vh] ">
                 <button
@@ -177,7 +198,7 @@ const aboutPage = () => {
         <>
           <div className="fixed inset-0 bg-black/60 z-10 pointer-events-none" />
           <div className="absolute inset-0 z-50">
-            <Form
+            <FormNew
               title="CONTACT US"
               text1="Please give your personal details"
               text2="Please give your address details"

@@ -10,6 +10,7 @@ import Testimony from "@components/Testimony";
 import ContactUs from "@components/ContactUs";
 import Form from "@components/Form";
 import { useFormContext } from "./context";
+import FormNew from "@components/FormNew";
 
 const LandingPage = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
@@ -46,7 +47,7 @@ const LandingPage = () => {
         <>
           <div className="fixed inset-0 bg-black/60 z-10 pointer-events-none" />
           <div className="absolute inset-0 z-50">
-            <Form
+            <FormNew
               title="CONTACT US"
               text1="Please give your personal details"
               text2="Please give your address details"

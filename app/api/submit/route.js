@@ -1,42 +1,55 @@
-import { connectToMongoDB } from "@libs/mongodb";
+import { google } from "googleapis";
 import { NextResponse } from "next/server";
-import User from "@models/user";
 
 export async function POST(req) {
   try {
-    const { name, mobile, email, address, city, state, pinCode } =
-      await req.json();
+    const body = await req.json();
+    const { name, mobile, email, address, city, state, pinCode } = body;
 
-    await connectToMongoDB();
-
-    const existingUser = await User.findOne({ $or: [{ mobile }, { email }] });
-
-    if (existingUser) {
-      const duplicateField =
-        existingUser.mobile === mobile ? "mobile" : "email";
+    if (!name || !mobile || !email || !address || !city || !state || !pinCode) {
       return NextResponse.json(
-        { duplicateField: duplicateField },
+        { error: "Missing required fields." },
         { status: 400 }
       );
     }
 
-    const newUser = await User.create({
-      name,
-      mobile,
-      email,
-      address,
-      city,
-      state,
-      pinCode,
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"), //regex to convert \n in google's private keys to actual new lines
+      },
+      scopes: [
+        "https://www.googleapis.com/auth/drive",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/spreadsheets",
+      ],
     });
 
+    const sheets = google.sheets({
+      auth,
+      version: "v4",
+    });
+
+    const response = await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "A1:G1",
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [[name, mobile, email, address, city, state, pinCode]],
+      },
+    });
     return NextResponse.json(
-      { message: "User successfully created.", user: newUser },
-      { status: 201 }
+      {
+        data: response.data,
+        message: "Data appended successfully!",
+      },
+      { status: 200 }
     );
   } catch (error) {
-    console.log(error.message);
-    const errorMessage = error.message;
-    return NextResponse.json({ message: errorMessage }, { status: 500 });
+    console.error("Error:", error.message);
+    return NextResponse.json(
+      { error: "Internal Server Error", details: error.message },
+      { status: 500 }
+    );
   }
 }
