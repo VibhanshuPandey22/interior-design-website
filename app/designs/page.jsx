@@ -6,7 +6,6 @@ import { useEffect, useRef } from "react";
 import { useState } from "react";
 import Image from "next/image";
 import { useFormContext } from "@app/context";
-import Form from "@components/Form";
 import { roomTypes, designs } from "@constants/designs";
 import { X } from "lucide-react";
 import { ArrowLeft } from "lucide-react";

@@ -30,6 +30,29 @@ export async function POST(req) {
       version: "v4",
     });
 
+    const getRows = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "A:G",
+    });
+
+    console.log(getRows);
+    const dataRows = getRows.data.values || [];
+    console.log(dataRows);
+
+    if (dataRows.length > 1) {
+      const rows = dataRows.slice(1);
+
+      const mobileExists = rows.some((row) => row[1] === mobile);
+      if (mobileExists) {
+        return NextResponse.json({ uniqueMobile: false }, { status: 400 });
+      }
+
+      const emailExists = rows.some((row) => row[2] === email);
+      if (emailExists) {
+        return NextResponse.json({ uniqueEmail: false }, { status: 400 });
+      }
+    }
+
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: "A1:G1",

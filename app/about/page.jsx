@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useFormContext } from "@app/context";
-import Form from "@components/Form";
 import { founderDetails } from "@constants/aboutUs";
 import { X } from "lucide-react";
 import { ArrowLeft } from "lucide-react";

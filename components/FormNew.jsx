@@ -18,6 +18,9 @@ const FormNew = (props) => {
   const [wrongCity, setWrongCity] = useState(false);
   const [wrongName, setWrongName] = useState(false);
 
+  const [duplicateMobile, setDulicateMobile] = useState(false);
+  const [duplicateEmail, setDulicateEmail] = useState(false);
+
   const toggleForm = () => {
     setIsFormOpen((prev) => !prev);
     setIsFormSubmitted(false);
@@ -37,7 +40,7 @@ const FormNew = (props) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const mobileRegex = /^[6-9]\d{9}$/; // Ensures 10 digits, starting with 6-9
     const pinCodeRegex = /^[1-9][0-9]{5}$/; // Ensures 6 digits, not starting with 0
-    //name and state cant contain numbers
+    //name and state cannot contain numbers
     const cityRegex = /^[A-Za-z\s'-]+$/;
     const nameRegex = /^[A-Za-z\s'-]+$/;
 
@@ -133,6 +136,24 @@ const FormNew = (props) => {
           setIsFormSubmitted(true);
         } else if (!response.ok) {
           console.log("response object not ok :", response);
+          const result = await response.json();
+          console.log("result(extracted json from response) :", result);
+          if (result.uniqueMobile === false) {
+            setDulicateMobile(true);
+            setStep(1);
+            setFormData((prev) => ({
+              ...prev,
+              mobile: "",
+            }));
+          }
+          if (result.uniqueEmail === false) {
+            setDulicateEmail(true);
+            setStep(1);
+            setFormData((prev) => ({
+              ...prev,
+              email: "",
+            }));
+          }
         }
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -224,11 +245,15 @@ const FormNew = (props) => {
                     autoComplete="off"
                     onChange={(e) => {
                       const inputValue = e.target.value;
+
                       setFormData((prev) => ({
                         ...prev,
                         name: inputValue,
                       }));
-                      if (/^[A-Za-z\s'-]+$/.test(inputValue)) {
+                      if (
+                        /^[A-Za-z\s'-]+$/.test(inputValue) ||
+                        inputValue === ""
+                      ) {
                         setWrongName(false);
                       } else {
                         setWrongName(true);
@@ -240,7 +265,7 @@ const FormNew = (props) => {
                   />
                   {wrongName && (
                     <div className="text-xs mt-1 text-red-600">
-                      Name should not contain numbers
+                      Name cannot contain special characters or numbers
                     </div>
                   )}
                 </div>
@@ -253,7 +278,7 @@ const FormNew = (props) => {
                   </label>
                   <input
                     onClick={() => {
-                      setWrongMobile(false);
+                      setDulicateMobile(false);
                     }}
                     id="mobile"
                     name="mobile"
@@ -267,7 +292,10 @@ const FormNew = (props) => {
                         ...prev,
                         mobile: inputValue,
                       }));
-                      if (/^[6-9]\d{9}$/.test(inputValue)) {
+                      if (
+                        /^[6-9]\d{9}$/.test(inputValue) ||
+                        inputValue === ""
+                      ) {
                         setWrongMobile(false);
                       } else {
                         setWrongMobile(true);
@@ -276,12 +304,20 @@ const FormNew = (props) => {
                     maxLength={10}
                     pattern="^[6-9]\d{9}$"
                     className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
-                      wrongMobile && "border-red-500 focus:ring-0"
+                      (wrongMobile || duplicateMobile) &&
+                      "border-red-500 focus:ring-0"
                     }`}
                   />
                   {wrongMobile && (
                     <div className="text-xs mt-1 text-red-600">
-                      Please enter a valid mobile number (10 digits)
+                      Please enter a valid number (10 digit, starting with 6, 7,
+                      8, 9)
+                    </div>
+                  )}
+                  {duplicateMobile && (
+                    <div className="text-xs mt-1 text-red-600">
+                      This mobile number is already in use, please try a
+                      different one
                     </div>
                   )}
                 </div>
@@ -294,7 +330,7 @@ const FormNew = (props) => {
                   </label>
                   <input
                     onClick={() => {
-                      setWrongEmail(false);
+                      setDulicateEmail(false);
                     }}
                     id="email"
                     name="email"
@@ -311,7 +347,8 @@ const FormNew = (props) => {
                       if (
                         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
                           inputValue
-                        )
+                        ) ||
+                        inputValue === ""
                       ) {
                         setWrongEmail(false);
                       } else {
@@ -319,12 +356,19 @@ const FormNew = (props) => {
                       }
                     }}
                     className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
-                      wrongEmail && "border-red-500 focus:ring-0"
+                      (wrongEmail || duplicateEmail) &&
+                      "border-red-500 focus:ring-0"
                     }`}
                   />
                   {wrongEmail && (
                     <div className="text-xs mt-1 text-red-600">
-                      Please enter a valid email
+                      Please enter a valid email address (e.g.,
+                      name@example.com)
+                    </div>
+                  )}
+                  {duplicateEmail && (
+                    <div className="text-xs mt-1 text-red-600">
+                      This email is already in use, please try a different one
                     </div>
                   )}
                 </div>
@@ -372,9 +416,6 @@ const FormNew = (props) => {
                     City <span className="text-red-600">*</span>
                   </label>
                   <input
-                    onClick={() => {
-                      setWrongCity(false);
-                    }}
                     id="city"
                     name="city"
                     type="text"
@@ -387,7 +428,10 @@ const FormNew = (props) => {
                         ...prev,
                         city: inputValue,
                       }));
-                      if (/^[A-Za-z\s'-]+$/.test(inputValue)) {
+                      if (
+                        /^[A-Za-z\s'-]+$/.test(inputValue) ||
+                        inputValue === ""
+                      ) {
                         setWrongCity(false);
                       } else {
                         setWrongCity(true);
@@ -399,7 +443,7 @@ const FormNew = (props) => {
                   />
                   {wrongCity && (
                     <div className="text-xs mt-1 text-red-600">
-                      City should not contain numbers
+                      City name cannot contain special characters or numbers
                     </div>
                   )}
                 </div>
@@ -446,9 +490,6 @@ const FormNew = (props) => {
                     Pin Code <span className="text-red-600">*</span>
                   </label>
                   <input
-                    onClick={() => {
-                      setWrongPinCode(false);
-                    }}
                     id="pinCode"
                     name="pinCode"
                     type="tel"
@@ -461,7 +502,10 @@ const FormNew = (props) => {
                         ...prev,
                         pinCode: inputValue,
                       }));
-                      if (/^[1-9][0-9]{5}$/.test(inputValue)) {
+                      if (
+                        /^[1-9][0-9]{5}$/.test(inputValue) ||
+                        inputValue === ""
+                      ) {
                         setWrongPinCode(false);
                       } else {
                         setWrongPinCode(true);
@@ -474,7 +518,8 @@ const FormNew = (props) => {
                   />
                   {wrongPinCode && (
                     <div className="text-xs mt-1 text-red-600">
-                      Please enter a valid pin code (0-6 digits)
+                      Please enter a valid pincode (6 digit, not starting with
+                      0)
                     </div>
                   )}
                 </div>
