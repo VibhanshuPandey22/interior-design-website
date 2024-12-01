@@ -4,11 +4,14 @@ import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { serviceCards } from "@constants/aboutCards";
+import { useRouter } from "next/navigation";
 
 const Services = () => {
   gsap.registerPlugin(ScrollTrigger);
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
+  const router = useRouter();
+
   useGSAP(() => {
     gsap.fromTo(
       cardsRef.current,
@@ -85,7 +88,10 @@ const Services = () => {
           ))}
         </div>
         <div className="flex justify-center">
-          <button className="flex justify-start mt-14 md:max-lg:mt-12 max-md:mt-10 border-black text-black bg-offWhite hover:bg-black hover:border-black hover:text-offWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2">
+          <button
+            onClick={() => router.push("/ourServices")}
+            className="flex justify-start mt-14 md:max-lg:mt-12 max-md:mt-10 border-black text-black bg-offWhite hover:bg-black hover:border-black hover:text-offWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2"
+          >
             <span className="tracking-wide">OUR SERVICES</span>
           </button>
         </div>

@@ -16,8 +16,8 @@ const Designs = () => {
   gsap.registerPlugin(ScrollTrigger);
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
-  const modalRef = useRef(null); // Ref for the modal content
-  const overlayRef = useRef(null); // Ref for the overlay (background)
+  const modalRef = useRef(null);
+  const overlayRef = useRef(null);
 
   useGSAP(() => {
     gsap.fromTo(

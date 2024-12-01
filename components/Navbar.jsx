@@ -11,6 +11,7 @@ const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { isFormOpen, setIsFormOpen } = useFormContext();
+  const divRef = useRef(null);
 
   const toggleForm = () => {
     if (menuOpen) {
@@ -31,8 +32,22 @@ const Navbar = () => {
       setIsShadowVisible(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  useEffect(() => {
+    const handleClickOutsideDiv = (e) => {
+      if (menuOpen && divRef.current && !divRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutsideDiv);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideDiv);
+    };
+  }, [menuOpen]);
 
   return (
     <nav
@@ -106,7 +121,10 @@ const Navbar = () => {
         </div>
       </div>
       {menuOpen && (
-        <div className="z-100 absolute inset-0 w-screen h-fit pb-10 bg-offWhite shadow-md">
+        <div
+          ref={divRef}
+          className="z-100 absolute inset-0 w-screen h-fit pb-10 bg-offWhite shadow-md"
+        >
           <div
             onClick={toggleMenu}
             className="hover:text-orange-600 transition-all duration-200 mt-4 pl-2 mb-4 cursor-pointer w-fit"

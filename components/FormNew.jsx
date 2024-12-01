@@ -259,7 +259,7 @@ const FormNew = (props) => {
                         setWrongName(true);
                       }
                     }}
-                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
                       wrongName && "border-red-500 focus:ring-0"
                     }`}
                   />
@@ -303,7 +303,7 @@ const FormNew = (props) => {
                     }}
                     maxLength={10}
                     pattern="^[6-9]\d{9}$"
-                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
                       (wrongMobile || duplicateMobile) &&
                       "border-red-500 focus:ring-0"
                     }`}
@@ -355,7 +355,7 @@ const FormNew = (props) => {
                         setWrongEmail(true);
                       }
                     }}
-                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
                       (wrongEmail || duplicateEmail) &&
                       "border-red-500 focus:ring-0"
                     }`}
@@ -437,7 +437,7 @@ const FormNew = (props) => {
                         setWrongCity(true);
                       }
                     }}
-                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
                       wrongCity && "border-red-500 focus:ring-0"
                     }`}
                   />
@@ -512,7 +512,7 @@ const FormNew = (props) => {
                       }
                     }}
                     maxLength={6}
-                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                    className={`w-full px-3 py-2 border bg-offWhite border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent ${
                       wrongPinCode && "border-red-500 focus:ring-0"
                     }`}
                   />

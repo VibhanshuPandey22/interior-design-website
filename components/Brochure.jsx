@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { aboutCards } from "@constants/aboutCards";
+
 const Brochure = () => {
   gsap.registerPlugin(ScrollTrigger);
   const buttonRef = useRef(null);
