@@ -65,7 +65,13 @@ const Brochure = () => {
                 ref={buttonRef}
                 className="flex justify-start mt-12 max-md:mt-7 md:max-lg:mt-10 border-offWhite text-offWhite bg-transparent hover:bg-offWhite hover:border-offWhite hover:text-black transition-all duration-300 border px-4 py-2 font-montserrat max-sm:text-sm max-sm:py-2 max-sm:px-2"
               >
-                <span className="tracking-wider">DOWNLOAD THE BROCHURE</span>
+                <a
+                  href="/downloads/Tailwind CSS Starter Kit.pdf"
+                  download="Bricks and Care brochure.pdf"
+                  className="tracking-wider"
+                >
+                  DOWNLOAD THE BROCHURE
+                </a>
               </button>
             </div>
             <div className="max-sm:px-6 max-sm:text-xs text-sm max-sm:max-w-md sm:max-lg:max-w-lg tracking-wide">

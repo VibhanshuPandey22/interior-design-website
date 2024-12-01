@@ -50,9 +50,9 @@ const aboutPage = () => {
               <div className="relative w-full max-h-[90vh] ">
                 <button
                   onClick={closeFounderDiv}
-                  className="absolute top-3 left-3 text-offWhite hover:text-orange-600 transition-all duration-300 z-50"
+                  className="fixed top-5 right-5 text-offWhite hover:text-orange-600 transition-all duration-300 z-50"
                 >
-                  <X size={20} />
+                  <X size={22} />
                 </button>
                 <div className="relative h-full">
                   <Image
@@ -62,13 +62,13 @@ const aboutPage = () => {
                     height={800}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute bottom-0 right-0 py-3 px-7 bg-black max-sm:px-3 max-sm:py-1">
-                    <h2 className="text-2xl font-semibold text-offWhite max-sm:text-[0.8rem]">
+                  <div className="absolute bottom-0 right-0 py-2 px-6 bg-black max-sm:px-3 max-sm:py-1">
+                    <h2 className="text-xl font-semibold text-offWhite max-sm:text-[0.8rem]">
                       {selectedFounder.name}
                     </h2>
                   </div>
                 </div>
-                <div className="relative mt-5 mb-5 max-sm:mt-1 max-sm:mb-1 py-3 px-7 max-sm:text-[0.65rem]">
+                <div className="relative mt-5 mb-5 max-sm:mt-1 max-sm:mb-1 py-3 px-7 text-[0.85rem] max-sm:text-[0.65rem]">
                   <p>{selectedFounder.detailedDescription}</p>
                 </div>
               </div>
@@ -78,7 +78,7 @@ const aboutPage = () => {
       )}
 
       <div className="bg-offWhite sm:py-8 px-10 sm:px-14 lg:px-20 pb-10">
-        <div className="max-w-5xl max-lg:max-w-2xl max-md:max-w-md max-sm:max-w-sm mx-auto">
+        <div className="w-full px-2 mx-auto">
           <div>
             <div className="lg:flex lg:items-center lg:justify-between">
               <div>
@@ -125,51 +125,37 @@ const aboutPage = () => {
                 <h3 className="text-3xl max-md:text-2xl max-sm:text-xl font-semibold text-black pointer-events-none">
                   MEET <span className="text-orange-600">OUR</span> FOUNDERS
                 </h3>
-                <div className="mt-2 sm:mt-5 md:mt-9 w-full">
-                  <div className="flex items-center flex-col w-full">
-                    {founderDetails.map((founder, index) => (
+                <div className="mt-2 pt-4 sm:mt-5 md:mt-9 w-full">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                    {founderDetails.map((founder) => (
                       <div
                         key={founder.id}
-                        className={`py-8 max-sm:py-6 w-full ${
-                          founder.id === founderDetails.length
-                            ? "border-none"
-                            : "border-b"
-                        }`}
+                        onClick={() => openFounderDiv(founder)}
+                        className="relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 cursor-pointer group"
                       >
-                        <div className="flex items-center gap-5 max-md:gap-3 max-sm:gap-1">
-                          <div className="max-sm:hidden relative">
-                            <Image
-                              onClick={() => openFounderDiv(founder)}
-                              className={`object-cover h-36 w-36 rounded-full hover:transform hover:scale-105 cursor-pointer shadow-md hover:shadow-lg transition-all duration-300`}
-                              src={founder.imageUrl}
-                              alt="Founder"
-                              width={150}
-                              height={150}
-                            />
-                          </div>
-                          <div className="sm:hidden">
-                            <Image
-                              onClick={() => openFounderDiv(founder)}
-                              className={`object-cover h-24 w-24 rounded-full hover:transform hover:scale-105 cursor-pointer shadow-md hover:shadow-lg transition-all duration-300`}
-                              src={founder.imageUrl}
-                              alt="Founder"
-                              width={120}
-                              height={120}
-                            />
-                          </div>
-                          <div className="ml-4">
-                            <h4 className="sm:text-xl max-sm:text-[1rem] font-bold text-orange-600 pointer-events-none">
+                        <Image
+                          src={founder.imageUrl}
+                          alt={founder.name}
+                          width={400}
+                          height={300}
+                          className="w-full h-[12.5rem] max-sm:h-[11rem] object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-90 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 ">
+                          <span className="text-white text-lg font-semibold">
+                            More About{" "}
+                            <span className="text-orange-600">
                               {founder.name}
-                            </h4>
-                            <p className="max-sm:text-xs sm:text-[0.95rem] text-black pointer-events-none">
-                              {founder.designation}
-                            </p>
-                          </div>
+                            </span>
+                          </span>
                         </div>
-
-                        <p className="mt-5 text-[0.9rem] max-lg:text-[0.8rem] max-md:text-sm max-sm:text-[0.73rem] text-gray-500 pointer-events-none">
-                          {founder.description}
-                        </p>
+                        <div className="p-6">
+                          <h3 className="text-xl max-lg:text-lg max-md:text-sm font-semibold text-gray-800 mb-2 ">
+                            {founder.name}
+                          </h3>
+                          <p className="text-gray-500 text-[0.9rem] max-lg:text-[0.85rem] max-sm:text-[0.7rem]">
+                            {founder.description}
+                          </p>
+                        </div>
                       </div>
                     ))}
                   </div>
