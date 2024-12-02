@@ -78,7 +78,7 @@ const aboutPage = () => {
       )}
 
       <div className="bg-offWhite sm:py-8 px-10 sm:px-14 lg:px-20 pb-10">
-        <div className="w-full px-2 mx-auto">
+        <div className="max-w-[90rem] w-full px-2 mx-auto">
           <div>
             <div className="lg:flex lg:items-center lg:justify-between">
               <div>

@@ -168,7 +168,7 @@ const FormNew = (props) => {
         <div className="w-full sm:w-3/4 md:w-2/3 xl:w-1/2 h-auto bg-offWhite rounded-lg shadow-lg p-4 sm:p-8 relative flex items-center justify-center mx-auto">
           <div
             onClick={toggleForm}
-            className="absolute top-3 left-3 cursor-pointer hover:text-orange-600 transition-all duration-300 h-fit w-fit"
+            className="absolute top-3 right-3 cursor-pointer hover:text-orange-600 transition-all duration-300 h-fit w-fit"
           >
             <X size={20} />
           </div>
@@ -200,13 +200,13 @@ const FormNew = (props) => {
         >
           <div
             onClick={toggleForm}
-            className="absolute inset-0 top-3 left-3 cursor-pointer hover:text-orange-600 transition-all duration-300 h-fit w-fit"
+            className="absolute top-3 right-3 cursor-pointer hover:text-orange-600 transition-all duration-300 h-fit w-fit"
           >
             <X size={20} />
           </div>
           <div
             onClick={toggleForm}
-            className="absolute top-3 right-3 cursor-pointer pointer-events-none h-fit w-fit"
+            className="absolute top-3 left-3 cursor-pointer pointer-events-none h-fit w-fit"
           >
             <div
               className={`text-[0.65rem] font-semibold flex justify-center items-center h-8 w-8 bg-white rounded-full border-4 ${

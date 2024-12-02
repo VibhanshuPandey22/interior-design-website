@@ -60,9 +60,9 @@ const ourServices = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="font-montserrat">
+    <section ref={sectionRef} className="font-montserrat ">
       <div className="min-h-screen bg-darkerOffWhite">
-        <div className="mx-auto py-6 px-5 sm:px-6 lg:px-7 ">
+        <div className="max-w-[90rem] mx-auto py-6 px-5 sm:px-6 lg:px-7 ">
           <div className="relative h-64 sm:h-80 md:h-[26rem] xl:h-[28rem] rounded-lg overflow-hidden mb-8 pointer-events-none">
             <Image
               src="/bg4.jpg"
@@ -144,10 +144,10 @@ const ourServices = () => {
         </div>
       </div>
 
-      <div className="flex justify-end mr-10 mb-10">
+      <div className="flex justify-end pr-10 pb-10 bg-darkerOffWhite">
         <button
           onClick={() => router.push("/")}
-          className="flex justify-start mt-10 md:max-lg:mt-8 max-md:mt-5 hover:text-orange-600  transition-all duration-300 font-montserrat"
+          className="flex justify-start mt-4 md:max-lg:mt-8 max-md:mt-5 hover:text-orange-600  transition-all duration-300 font-montserrat"
         >
           <span className="flex justify-center items-center gap-1 text-sm">
             {" "}

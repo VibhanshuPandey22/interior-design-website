@@ -90,7 +90,7 @@ const Designs = () => {
   return (
     <section ref={sectionRef} className="mt-4">
       <div className="min-h-screen bg-offWhite py-12 px-4 sm:px-6 lg:px-8 font-montserrat">
-        <div className="max-w-7xl mx-auto">
+        <div className="px-5 max-w-[90rem] mx-auto">
           <h1 className="text-4xl max-md:text-3xl font-semibold text-left max-md:text-center text-gray-900 mb-10 mt-5">
             VIEW OUR DESIGNS
           </h1>
@@ -152,9 +152,9 @@ const Designs = () => {
             <div className="relative w-full h-full max-h-[90vh] overflow-auto">
               <button
                 onClick={closeImage}
-                className="absolute top-3 left-3 text-offWhite hover:text-orange-600 transition-all duration-300"
+                className="fixed top-5 right-5 text-offWhite hover:text-orange-600 transition-all duration-300"
               >
-                <X size={20} />
+                <X size={24} />
               </button>
               <Image
                 src={selectedDesign.image}

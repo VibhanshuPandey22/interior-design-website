@@ -44,8 +44,8 @@ const ContactUs = () => {
             CONNECT WITH US
           </div>
           <div className="max-sm:text-xs text-sm lg:text-[0.85rem] xl:text-[1.05rem] max-w-sm lg:max-w-lg xl:max-w-5xl tracking-wide">
-            Contact us via WhatsApp or give us a call to enjoy the ultimate home
-            design experience.
+            Contact us via Gmail or start now by sharing your details to enjoy
+            the ultimate home design experience.
           </div>
         </div>
         <div className=" col-span-full flex items-center justify-center gap-5 xl:gap-6 mt-3 xl:mt-5">
@@ -57,16 +57,20 @@ const ContactUs = () => {
               <span>
                 <img src="/call.svg" height={22} width={22} alt="" />
               </span>
-              <span className="tracking-wide text-blue-600">Call Now</span>
+              <span className="tracking-wide text-blue-600">Get started</span>
             </button>
           </div>
           <div>
-            <button className="flex gap-2 rounded-full justify-center items-centertransition-all duration-300 px-4 py-2 bg-offWhite drop-shadow-md hover:drop-shadow-lg text-sm xl:text-[1.05rem] xl:py-3">
+            <a
+              className="rounded-full transition-all duration-300 px-4 py-2 bg-offWhite drop-shadow-md hover:drop-shadow-lg text-sm xl:text-[1.05rem] xl:py-3 flex gap-2 justify-center items-center w-full"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=kaizenspreadsheet@gmail.com"
+              target="_blank"
+            >
               <span>
-                <img src="/whatsapp.svg" height={22} width={22} alt="" />
+                <img src="/gmail.svg" height={22} width={22} alt="" />
               </span>
-              <span className="tracking-wide text-green-600">Whatsapp</span>
-            </button>
+              <span className="tracking-wide text-green-600">Message us</span>
+            </a>
           </div>
         </div>
       </div>
