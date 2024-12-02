@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { ScrollTrigger } from "gsap/all";
 
 const ourServices = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
@@ -20,6 +21,7 @@ const ourServices = () => {
     setIsFormOpen((prev) => !prev);
   };
 
+  gsap.registerPlugin(ScrollTrigger);
   useGSAP(() => {
     gsap.fromTo(
       cardsRef.current,

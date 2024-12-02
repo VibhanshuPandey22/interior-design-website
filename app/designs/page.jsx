@@ -35,6 +35,7 @@ const Designs = () => {
         },
         stagger: 0.125,
         duration: 0.275,
+        delay: 0.25,
 
         ease: "power2.inOut",
       }

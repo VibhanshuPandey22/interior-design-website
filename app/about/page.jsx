@@ -7,6 +7,9 @@ import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import FormNew from "@components/FormNew";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 
 const aboutPage = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
@@ -14,6 +17,50 @@ const aboutPage = () => {
   const router = useRouter();
   const modalRef = useRef(null); // Ref for the modal content
   const overlayRef = useRef(null); // Ref for the overlay (background)
+  const sectionRef = useRef(null);
+  const cardsRef = useRef([]);
+  gsap.registerPlugin(ScrollTrigger);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      cardsRef.current,
+      {
+        opacity: 0,
+        x: -25,
+      },
+      {
+        opacity: 1,
+        x: 0,
+
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 90%",
+          end: "bottom 10%",
+        },
+        stagger: 0.175,
+        duration: 0.25,
+        delay: 0.15,
+
+        ease: "power2.inOut",
+      }
+    );
+    gsap.fromTo(
+      sectionRef.current,
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 90%",
+          end: "bottom 10%",
+        },
+        duration: 0.35,
+        ease: "power1.out",
+      }
+    );
+  }, []);
 
   useEffect(() => {
     const handeClickOutsideModal = (e) => {
@@ -36,7 +83,10 @@ const aboutPage = () => {
   };
 
   return (
-    <section className="min-h-screen font-montserrat mt-10 relative ">
+    <section
+      ref={sectionRef}
+      className="min-h-screen font-montserrat mt-10 relative "
+    >
       {selectedFounder && (
         <div
           ref={overlayRef}
@@ -80,7 +130,7 @@ const aboutPage = () => {
       <div className="bg-offWhite sm:py-8 px-10 sm:px-14 lg:px-20 pb-10">
         <div className="max-w-[90rem] w-full px-2 mx-auto">
           <div>
-            <div className="lg:flex lg:items-center lg:justify-between">
+            <div className="flex flex-col items-center justify-between gap-20 max-xl:gap-16 max-md:gap-14 max-sm:gap-10">
               <div>
                 <h3 className="text-3xl max-md:text-2xl max-sm:text-xl font-semibold leading-7 text-black mb-7 pointer-events-none">
                   WHO <span className="text-orange-600">ARE</span> WE?
@@ -116,6 +166,63 @@ const aboutPage = () => {
                   aliquid quos nobis labore possimus rerum illum!
                 </p>
               </div>
+              <div>
+                <h3 className="text-3xl max-md:text-2xl max-sm:text-xl font-semibold leading-7 text-black mb-7 pointer-events-none">
+                  OUR <span className="text-orange-600">KEY</span> OBJECTIVES
+                </h3>
+                <p className="mt-3 text-[0.9rem] max-lg:text-[0.8rem] max-md:text-sm max-sm:text-xs text-black pointer-events-none">
+                  Founded in 2010, our company has been at the forefront of
+                  technological innovation. We've grown from a small startup to
+                  a global leader, always staying true to our core values of
+                  creativity, integrity, and customer focus. Founded in 2010,
+                  our company has been at the forefront of technological
+                  innovation. We've grown from a small startup to a global
+                  leader, always staying true to our core values of creativity,
+                  integrity, and customer focus.
+                  <br />
+                  <br />
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                  error optio impedit eius temporibus. Consequuntur laboriosam
+                  ullam nam, autem nobis tempora placeat labore vero nihil!
+                  Voluptas libero earum culpa obcaecati. Lorem ipsum dolor sit
+                  amet consectetur, adipisicing elit. Pariatur, debitis
+                  temporibus unde fugiat corporis obcaecati provident!
+                  <br />
+                  <br />
+                  Consequatur voluptatem earum velit laborum! Temporibus nulla
+                  aliquid quos nobis labore possimus rerum illum! Lorem, ipsum
+                  dolor sit amet consectetur adipisicing elit. Facilis accusamus
+                  nemo excepturi laboriosam veniam incidunt vel nisi eius,
+                  quisquam omnis doloribus ratione reprehenderit soluta
+                  perspiciatis libero ut error sit optio.
+                  <br />
+                  <br />
+                  Founded in 2010, our company has been at the forefront of
+                  technological innovation. We've grown from a small startup to
+                  a global leader, always staying true to our core values of
+                  creativity, integrity, and customer focus. Founded in 2010,
+                  our company has been at the forefront of technological
+                  innovation. We've grown from a small startup to a global
+                  leader, always staying true to our core values of creativity,
+                  integrity, and customer focus.
+                  <br />
+                  <br />
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                  error optio impedit eius temporibus. Consequuntur laboriosam
+                  ullam nam, autem nobis tempora placeat labore vero nihil!
+                  Voluptas libero earum culpa obcaecati. Lorem ipsum dolor sit
+                  amet consectetur, adipisicing elit. Pariatur, debitis
+                  temporibus unde fugiat corporis obcaecati provident!
+                  <br />
+                  <br />
+                  Consequatur voluptatem earum velit laborum! Temporibus nulla
+                  aliquid quos nobis labore possimus rerum illum! Lorem, ipsum
+                  dolor sit amet consectetur adipisicing elit. Facilis accusamus
+                  nemo excepturi laboriosam veniam incidunt vel nisi eius,
+                  quisquam omnis doloribus ratione reprehenderit soluta
+                  perspiciatis libero ut error sit optio.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -127,8 +234,9 @@ const aboutPage = () => {
                 </h3>
                 <div className="mt-2 pt-4 sm:mt-5 md:mt-9 w-full">
                   <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                    {founderDetails.map((founder) => (
+                    {founderDetails.map((founder, index) => (
                       <div
+                        ref={(el) => (cardsRef.current[index] = el)}
                         key={founder.id}
                         onClick={() => openFounderDiv(founder)}
                         className="relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 cursor-pointer group"

@@ -3,10 +3,12 @@ import React from "react";
 import Image from "next/image";
 import { useRef } from "react";
 import { useFormContext } from "@app/context";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
   const textRef = useRef(null);
+  const router = useRouter();
 
   return (
     <section
@@ -55,7 +57,10 @@ const Hero = () => {
               </p>
             </div>
 
-            <button className="flex justify-start mt-7 border-black text-offWhite bg-black hover:bg-offWhite hover:border-black hover:text-black transition-all duration-300 border px-4 py-2 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2">
+            <button
+              onClick={() => router.push("/about")}
+              className="flex justify-start mt-7 border-black text-offWhite bg-black hover:bg-offWhite hover:border-black hover:text-black transition-all duration-300 border px-4 py-2 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2"
+            >
               <span className="tracking-wide"> LEARN MORE</span>
             </button>
           </div>

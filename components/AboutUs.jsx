@@ -121,7 +121,7 @@ const AboutUs = () => {
                 ref={buttonRef}
                 className="flex justify-start mt-12 max-md:mt-7 md:max-lg:mt-10 border-black text-black bg-darkerOffWhite hover:bg-black hover:border-black hover:text-darkerOffWhite transition-all duration-300 border px-3 py-1 font-montserrat max-sm:text-xs max-sm:py-1 max-sm:px-2"
               >
-                <span className="tracking-wide">LEARN MORE</span>
+                <span className="tracking-wide">MORE ABOUT US</span>
               </button>
             </p>
           </div>
