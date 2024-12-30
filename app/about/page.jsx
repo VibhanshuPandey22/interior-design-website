@@ -11,7 +11,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
-const aboutPage = () => {
+const AboutPage = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
   const [selectedFounder, setSelectedFounder] = useState(null);
   const router = useRouter();
@@ -303,4 +303,4 @@ const aboutPage = () => {
   );
 };
 
-export default aboutPage;
+export default AboutPage;
