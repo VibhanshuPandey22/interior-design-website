@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation";
 import FormNew from "@components/FormNew";
 import { workTypes, workList } from "@constants/ourWorkList";
 
-const ourWork = () => {
+const OurWork = () => {
   gsap.registerPlugin(ScrollTrigger);
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
@@ -216,4 +216,4 @@ const ourWork = () => {
   );
 };
 
-export default ourWork;
+export default OurWork;

@@ -10,7 +10,7 @@ import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ScrollTrigger } from "gsap/all";
 
-const ourServices = () => {
+const OurServices = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
   const [learnMore, setLearnMore] = useState(false);
   const sectionRef = useRef(null);
@@ -175,4 +175,4 @@ const ourServices = () => {
   );
 };
 
-export default ourServices;
+export default OurServices;

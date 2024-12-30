@@ -3,7 +3,7 @@ import React from "react";
 import FormNew from "@components/FormNew";
 import { useFormContext } from "@app/context";
 
-const page = () => {
+const Page = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
   return (
     <div>
@@ -23,4 +23,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
