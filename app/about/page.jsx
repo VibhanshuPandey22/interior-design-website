@@ -15,8 +15,8 @@ const aboutPage = () => {
   const { isFormOpen, setIsFormOpen } = useFormContext();
   const [selectedFounder, setSelectedFounder] = useState(null);
   const router = useRouter();
-  const modalRef = useRef(null); // Ref for the modal content
-  const overlayRef = useRef(null); // Ref for the overlay (background)
+  const modalRef = useRef(null);
+  const overlayRef = useRef(null);
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
   gsap.registerPlugin(ScrollTrigger);
