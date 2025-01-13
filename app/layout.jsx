@@ -11,7 +11,7 @@ export const metadata = {
 const RootLayout = ({ children }) => {
   return (
     <FormProvider>
-      <html lang="en ">
+      <html lang="en">
         <body className="bg-offWhite">
           <Navbar />
           <main className={`pt-16 max-sm:pt-14`}>{children}</main>

@@ -51,7 +51,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`w-full h-fit bg-offWhite fixed py-1 px-6 flex items-center z-50 max-sm:px-5 ${
+      className={` p-safe-top w-full h-fit bg-offWhite fixed py-1 px-6 flex items-center z-50 max-sm:px-5 ${
         isShadowVisible && "shadow-md"
       }`}
     >
