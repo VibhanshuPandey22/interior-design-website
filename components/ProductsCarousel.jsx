@@ -34,7 +34,7 @@ const ProductsCarousel = () => {
   return (
     <section
       ref={sectionRef}
-      className="border-y-[1px] pt-20 pb-20 max-sm:pt-14 max-sm:pb-14"
+      className="border-y-[1px] pt-20 pb-20 max-sm:pt-14 max-sm:pb-14 max-w-full"
     >
       <div>
         <div className=" gap-3 mx-0 md:max-lg:ml-9 lg:max-xl:ml-8 xl:ml-10 font-montserrat  flex flex-col items-start max-md:items-center justify-start max-md:px-10">

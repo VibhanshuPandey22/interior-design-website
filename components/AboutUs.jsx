@@ -89,7 +89,7 @@ const AboutUs = () => {
   return (
     <section
       id="about"
-      className="pt-16 max-sm:pt-12 bg-darkerOffWhite pb-16 max-sm:pb-12"
+      className="pt-16 max-sm:pt-12 bg-darkerOffWhite pb-16 max-sm:pb-12 max-w-full"
     >
       <div className="px-6 h-full grid grid-cols-12 gap-5 text-[0.7rem] sm:max-md:text-xs md:max-lg:text-sm lg:text-[1rem] font-montserrat">
         <div className="animate1 col-span-full lg:col-span-6 flex flex-col gap-3">

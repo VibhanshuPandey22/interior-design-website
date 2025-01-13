@@ -15,12 +15,12 @@ const RootLayout = ({ children }) => {
         <head>
           <meta
             name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0 user-scalable=no"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
           />
         </head>
         <body className="bg-offWhite overflow-x-hidden">
           <Navbar />
-          <main className={`pt-16 max-sm:pt-14`}>{children}</main>
+          <main>{children}</main>
           <Footer />
         </body>
       </html>
@@ -29,3 +29,5 @@ const RootLayout = ({ children }) => {
 };
 
 export default RootLayout;
+
+// className={`pt-16 max-sm:pt-14`}

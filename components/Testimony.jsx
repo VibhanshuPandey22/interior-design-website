@@ -46,7 +46,10 @@ const Testimony = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="p-6 sm:p-8 font-montserrat mt-5 mb-5">
+    <section
+      ref={sectionRef}
+      className="p-6 sm:p-8 font-montserrat mt-5 mb-5 overflow-x-hidden"
+    >
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-full md:col-span-6">
           <div className="relative w-full pb-[56.25%] ">

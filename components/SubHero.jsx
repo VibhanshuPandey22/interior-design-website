@@ -6,7 +6,7 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 
 const SubHero = () => {
   return (
-    <section className=" w-full max-h-[50vh] border-y-[1px]">
+    <section className=" w-full max-h-[50vh] border-y-[1px] max-w-full">
       <div className="w-full flex justify-evenly max-md:flex-col max-md:gap-10 items-center max-md:py-14 py-20 ">
         <div className="w-full flex gap-4 flex-col max-md:flex-row max-md:justify-start max-md:pl-12 items-center justify-center">
           <div className="bg-black p-4 max-md:p-3 rounded-full border shadow-sm text-offWhite">

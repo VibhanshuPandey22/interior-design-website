@@ -53,7 +53,7 @@ const Services = () => {
     <section
       id="services"
       ref={sectionRef}
-      className="border-b-[1px] pt-16 pb-16 max-sm:pt-12 max-sm:pb-12 bg-darkerOffWhite"
+      className="border-b-[1px] pt-16 pb-16 max-sm:pt-12 max-sm:pb-12 bg-darkerOffWhite max-w-full"
     >
       <div className="font-montserrat flex flex-col justify-center items-center">
         <div className="font-medium tracking-normal text-xl md:max-lg:text-2xl lg:text-3xl flex max-md:flex-col justify-center items-center mb-10 max-sm:mb-8">

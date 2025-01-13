@@ -49,7 +49,7 @@ const Brochure = () => {
     );
   }, []);
   return (
-    <section ref={sectionRef}>
+    <section ref={sectionRef} className="max-w-full">
       <div>
         <div className="relative font-montserrat">
           <div>

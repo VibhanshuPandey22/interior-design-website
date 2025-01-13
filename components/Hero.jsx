@@ -13,7 +13,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className={`relative mb-0 pb-0 h-screen max-md:h-[75vh] w-full overflow-hidden `}
+      className={`relative mb-0 pb-0 h-screen max-md:h-[75vh] w-full overflow-hidden`}
     >
       <div className="relative w-full h-full">
         <Image
