@@ -36,7 +36,7 @@ const ContactUs = () => {
   return (
     <section
       ref={sectionRef}
-      className="pt-14 pb-14 md:max-lg:pt-16 md:max-lg:pb-16 lg:pt-20 lg:pb-20  bg-darkerOffWhite border-t font-montserrat px-5"
+      className="pt-14 pb-14 md:max-lg:pt-16 md:max-lg:pb-16 lg:pt-20 lg:pb-20 bg-darkerOffWhite border-t font-montserrat px-5"
     >
       <div className="grid grid-cols-12 gap-5">
         <div className="col-span-full text-center flex flex-col gap-4 xl:gap-7 items-center justify-center">

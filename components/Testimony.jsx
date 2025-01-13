@@ -49,9 +49,8 @@ const Testimony = () => {
     <section ref={sectionRef} className="p-6 sm:p-8 font-montserrat mt-5 mb-5">
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-full md:col-span-6">
-          <div className="relative w-full pt-[56.25%] ">
+          <div className="relative w-full pb-[56.25%] ">
             {" "}
-            {/*56.25 is 9/16 => Aspect Ratio 16:9 */}{" "}
             <video
               className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-lg"
               controls
@@ -88,3 +87,5 @@ const Testimony = () => {
 };
 
 export default Testimony;
+
+//56.25 is 9/16 => Aspect Ratio 16:9
